@@ -144,7 +144,7 @@ export const makePayment = async (req, res, next) => {
       { $push: { enrolledCourses: req.body } },
       { new: true }
     );
-    res.status(201).redirect("http://localhost:3000/dashboard");
+    res.status(201).redirect("https://skillshikhun.vercel.app/dashboard");
   } catch (error) {
     next(error);
   }
@@ -157,7 +157,7 @@ export const cancelledPayment = async (req, res, next) => {
       { $push: { cancelledPayments: req.body } },
       { new: true }
     );
-    res.status(201).redirect("http://localhost:3000/dashboard");
+    res.status(201).redirect("https://skillshikhun.vercel.app/dashboard");
   } catch (error) {
     next(error);
   }
