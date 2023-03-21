@@ -14,7 +14,7 @@ export const checkPhoneNumber = async (req, res, next) => {
       res.status(200).send(existPhone.phone);
       return;
     } else {
-      res.status(201).send(userPhone);
+      // res.status(201).send(userPhone);
       next();
     }
   } catch (error) {
@@ -36,7 +36,11 @@ export const sendOTP = async (req, res, next) => {
       const data = res.data;
       console.log(data);
     });
-    res.status(201).json({ message: "OTP Sent" });
+    res.status(201).json({
+      message: `OTP পাঠানোর টাকা নাই! ${OTP} এইটা দিয়ে দেন!`,
+      otp: `${OTP}`,
+      phone: `${phone}`,
+    });
   } catch (error) {
     console.log(error);
   }
@@ -139,8 +143,8 @@ export const login = async (req, res, next) => {
 
 export const makePayment = async (req, res, next) => {
   try {
-    const updatedUser = await user.findOneAndUpdate(
-      req.body.phone,
+    const updatedPayment = await user.findOneAndUpdate(
+      { phone: req.body.cus_phone },
       { $push: { enrolledCourses: req.body } },
       { new: true }
     );
@@ -152,8 +156,8 @@ export const makePayment = async (req, res, next) => {
 
 export const cancelledPayment = async (req, res, next) => {
   try {
-    const updatedUser = await user.findOneAndUpdate(
-      req.body.phone,
+    const updatedCancelled = await user.findOneAndUpdate(
+      { phone: req.body.cus_phone },
       { $push: { cancelledPayments: req.body } },
       { new: true }
     );

@@ -11,9 +11,13 @@ const app = express();
 
 app.use(
   cors({
+    origin: "http://localhost:3000", // replace with your frontend origin
     methods: ["GET", "POST", "DELETE", "UPDATE", "PUT", "PATCH"],
+    allowedHeaders: ["Content-Type"],
+    credentials: true,
   })
 );
+
 app.use(cookieParser());
 dotenv.config();
 app.use(express.json());

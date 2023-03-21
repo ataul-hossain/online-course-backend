@@ -43,18 +43,17 @@ const router = express.Router();
 
 router.post("/send-otp", checkPhoneNumber, sendOTP);
 router.post("/verify-otp", verifyOTP);
-router.post("/register", register);
-router.post("/create-user", createUser);
-router.put("/update-user/:phone", updateUser);
-router.delete("/delete-user/:phone", deleteUser);
-router.get("/users", getUsers);
+router.post("/create-user", verifyAdmin, createUser);
+router.put("/update-user/:phone", verifyUser, updateUser);
+router.delete("/delete-user/:phone", verifyUser, deleteUser);
+router.get("/users", verifyAdmin, getUsers);
 router.get("/user/:phone", getUser);
 router.post("/enroll/", makePayment);
 router.post("/cancelled/", cancelledPayment);
 
-router.post("/create-course", createCourse);
-router.put("/update-course/:id", updateCourse);
-router.delete("/delete-course/:id", deleteCourse);
+router.post("/create-course", verifyAdmin, createCourse);
+router.put("/update-course/:id", verifyAdmin, updateCourse);
+router.delete("/delete-course/:id", verifyAdmin, deleteCourse);
 router.get("/courses", getCourses);
 router.get("/course/:id", getCourse);
 // router.get("/course/:seo_slug", getCourseBySlug);
