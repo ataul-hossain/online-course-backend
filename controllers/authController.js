@@ -11,7 +11,7 @@ export const checkPhoneNumber = async (req, res, next) => {
     const existPhone = await user.findOne({ phone: userPhone });
     if (existPhone) {
       console.log("User Found! No OTP needed");
-      res.status(200).send(existPhone.phone);
+      res.status(200).send({ phone: existPhone.phone });
       return;
     } else {
       // res.status(201).send(userPhone);
